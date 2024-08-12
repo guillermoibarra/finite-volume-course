@@ -1,4 +1,6 @@
 site_name: "Fundamentals of Finite Volume Methods in CFD"
+site_url: https://guillermoibarra.github.io/finite-volume-course/
+site_author: Guillermo Ibarra
 
 # Repository
 repo_name: guillermoibarra/finite-volume-course
