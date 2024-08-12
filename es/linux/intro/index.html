@@ -1,0 +1,677 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../">
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.30">
+    
+    
+      
+        <title>Introduction to Linux - Fundamentos de Métodos de Volúmenes Finitos en CFD</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.3cba04c6.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CJetbrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Jetbrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#introduccion-a-linux" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../../" title="Fundamentos de Métodos de Volúmenes Finitos en CFD" class="md-header__button md-logo" aria-label="Fundamentos de Métodos de Volúmenes Finitos en CFD" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Fundamentos de Métodos de Volúmenes Finitos en CFD
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Introduction to Linux
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Seleccionar idioma">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.52 17.52 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04M18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12m-2.62 7 1.62-4.33L19.12 17h-3.24Z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="../../../linux/intro/" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="es" class="md-select__link">
+              Español
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/guillermoibarra/finite-volume-course" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    guillermoibarra/finite-volume-course
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../" class="md-tabs__link">
+        
+  
+    
+  
+  Inicio
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+    
+  
+  Linux Basics
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../" title="Fundamentos de Métodos de Volúmenes Finitos en CFD" class="md-nav__button md-logo" aria-label="Fundamentos de Métodos de Volúmenes Finitos en CFD" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Fundamentos de Métodos de Volúmenes Finitos en CFD
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/guillermoibarra/finite-volume-course" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    guillermoibarra/finite-volume-course
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inicio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Linux Basics
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Linux Basics
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Introduction to Linux
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Introduction to Linux
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#distribuciones-y-los-muchos-sabores-de-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      Distribuciones y los Muchos Sabores de Linux
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Distribuciones y los Muchos Sabores de Linux">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#repositorios-y-gestion-de-paquetes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Repositorios y Gestión de Paquetes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Repositorios y Gestión de Paquetes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sistemas-basados-en-debian" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sistemas Basados en Debian
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sistemas-basados-en-arch" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sistemas Basados en Arch
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sistemas-basados-en-rpm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sistemas Basados en RPM
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interfaz-grafica" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interfaz Gráfica
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Interfaz Gráfica">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gnome" class="md-nav__link">
+    <span class="md-ellipsis">
+      GNOME
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#xfce" class="md-nav__link">
+    <span class="md-ellipsis">
+      XFCE
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kde-plasma" class="md-nav__link">
+    <span class="md-ellipsis">
+      KDE Plasma
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gestores-de-ventanas-en-tiling-eg-i3-sway-awesome" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gestores de Ventanas en Tiling (e.g., i3, Sway, Awesome)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ciclo-de-lanzamiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ciclo de Lanzamiento
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ciclo de Lanzamiento">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lanzamiento-continuo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lanzamiento Continuo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lanzamiento-punto" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lanzamiento Punto
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="introduccion-a-linux">Introducción a Linux</h1>
+<p>Este curso, titulado <strong>"Fundamentos de los Métodos de Volúmenes Finitos en CFD: Teoría, Práctica e Implementación en Python,"</strong> se enfoca en las herramientas utilizadas en la dinámica de fluidos computacional (CFD). Si tuviéramos que resumir la esencia de este curso en una sola línea, podría ser algo como <strong>"Introducción a las Herramientas para el Análisis Multidisciplinario de Sistemas de Ingeniería."</strong> Aquí, utilizamos el término "herramienta" en un sentido amplio: no solo como un dispositivo físico, sino como cualquier cosa que ayude a alcanzar un objetivo, resolver un problema o facilitar un proceso. Esta interpretación más amplia incluye no solo dispositivos físicos, sino también software, metodologías, técnicas y algoritmos.</p>
+<p>Por ejemplo, el método de volúmenes finitos—una técnica que exploraremos en este curso—es una herramienta para resolver ecuaciones diferenciales, lo cual, a su vez, nos ayuda a representar procesos físicos. En este sentido, es una herramienta utilizada dentro de otra herramienta. A medida que avancemos en este curso, encontrarás una variedad de herramientas como estas, cada una con sus fortalezas y limitaciones. Comprender estos aspectos es crucial para utilizarlas efectivamente en ingeniería.</p>
+<p>Ahora, dirijamos nuestra atención a Linux. A menudo descrito como una familia de sistemas operativos de código abierto y similares a Unix, Linux es una herramienta de software por excelencia. Así como las herramientas físicas nos permiten manipular nuestro entorno, Linux nos permite controlar e interactuar con nuestro entorno computacional. Al igual que otros sistemas operativos como Windows o macOS, Linux gestiona la memoria y el procesador de una computadora, facilitando la comunicación entre el hardware y el software a través de su componente central, el kernel.</p>
+<p>En el contexto de este curso, Linux es más que solo un sistema operativo; es la base sobre la cual construiremos y ejecutaremos las diversas herramientas necesarias para el análisis multidisciplinario. Su naturaleza de código abierto, flexibilidad y amplio soporte para la computación científica lo hacen un entorno ideal para las simulaciones y análisis complejos que realizaremos. A medida que te adentres en este curso, verás cómo Linux, junto con otras herramientas, desempeña un papel crucial en la habilitación de un análisis riguroso y en la resolución innovadora de problemas que definen la ingeniería moderna.</p>
+<h2 id="distribuciones-y-los-muchos-sabores-de-linux">Distribuciones y los Muchos Sabores de Linux</h2>
+<p>Si estás listo para explorar Linux, tu primer paso será elegir una distribución de Linux, o distro. Linux en sí es esencialmente el kernel, la parte central del sistema operativo, mientras que una distro combina el kernel con bibliotecas y herramientas de soporte para crear un sistema operativo completo. En febrero de 2024, había más de 400 distribuciones activas de Linux, según Tecmint. En lugar de sugerir una distribución específica, es más útil comprender los factores clave que las diferencian: gestión de paquetes, interfaz gráfica y ciclo de lanzamiento.</p>
+<h3 id="repositorios-y-gestion-de-paquetes">Repositorios y Gestión de Paquetes</h3>
+<p>La columna vertebral de cualquier distribución de Linux es su sistema de repositorios y gestión de paquetes, que determina cómo se instala, actualiza y gestiona el software. Diferentes distros utilizan diferentes gestores de paquetes y repositorios, lo que influye en la disponibilidad del software, la facilidad de instalación y qué tan actualizado está tu sistema.</p>
+<h4 id="sistemas-basados-en-debian">Sistemas Basados en Debian</h4>
+<p>Las distros basadas en Debian, como Ubuntu, Linux Mint y Kali Linux, utilizan el gestor de paquetes APT (Advanced Package Tool). APT es conocido por su gran repositorio de paquetes y estabilidad, lo que lo hace adecuado tanto para entornos de escritorio como de servidor. Este equilibrio entre el software más reciente y la estabilidad lo convierte en una excelente opción para principiantes y aquellos que buscan ejecutar un servidor.</p>
+<h4 id="sistemas-basados-en-arch">Sistemas Basados en Arch</h4>
+<p>Distros como EndeavourOS y Manjaro utilizan el gestor de paquetes Pacman. Los sistemas basados en Arch, particularmente cuando se instalan desde cero, permiten a los usuarios controlar cada detalle del proceso de instalación y selección de paquetes. Mientras que distros como EndeavourOS y Manjaro ofrecen una experiencia de instalación más sencilla, aún ofrecen los beneficios del modelo de lanzamiento continuo de Arch y el control del usuario. Estos sistemas están recomendados para usuarios que desean tener un control total sobre su sistema, aunque vienen con una curva de aprendizaje pronunciada.</p>
+<h4 id="sistemas-basados-en-rpm">Sistemas Basados en RPM</h4>
+<p>Los sistemas basados en RPM, como Fedora y Red Hat Enterprise Linux (RHEL), están más orientados a entornos empresariales, priorizando la estabilidad y la seguridad. Estos sistemas son ideales para usuarios que priorizan la estabilidad, particularmente en entornos profesionales o de producción.</p>
+<h3 id="interfaz-grafica">Interfaz Gráfica</h3>
+<p>El entorno de escritorio (DE) define la experiencia visual e interactiva de usar tu sistema Linux. Dicta la apariencia, el rendimiento y el nivel de personalización posible. Elegir el DE adecuado puede mejorar significativamente tu experiencia como usuario.</p>
+<h4 id="gnome">GNOME</h4>
+<p>GNOME ofrece una interfaz pulida y coherente con un enfoque en la simplicidad y la eficiencia. Sin embargo, puede ser intensivo en recursos, lo que lo hace menos ideal para hardware más antiguo. Es adecuado para usuarios que prefieren un entorno moderno y rico en funciones, con menos énfasis en la personalización.</p>
+<h4 id="xfce">XFCE</h4>
+<p>XFCE está diseñado para ser eficiente en recursos mientras aún proporciona una experiencia completa de escritorio. Es una excelente opción para usuarios con hardware más antiguo o aquellos que prefieren un enfoque minimalista. XFCE es ideal para aquellos que priorizan la velocidad y la simplicidad, especialmente en hardware más antiguo.</p>
+<h4 id="kde-plasma">KDE Plasma</h4>
+<p>KDE Plasma es conocido por su flexibilidad y atractivo estético. Ofrece una amplia gama de opciones de personalización, lo que permite a los usuarios adaptar la interfaz a sus preferencias sin sacrificar el rendimiento. Es perfecto para usuarios que valoran la personalización y el atractivo visual.</p>
+<h4 id="gestores-de-ventanas-en-tiling-eg-i3-sway-awesome">Gestores de Ventanas en Tiling (e.g., i3, Sway, Awesome)</h4>
+<p>Los gestores de ventanas en tiling (TWMs) proporcionan un espacio de trabajo minimalista y altamente eficiente al organizar las ventanas en un patrón de cuadrícula sin superposición. Están diseñados para usuarios que prefieren la navegación mediante el teclado y un entorno libre de distracciones. Los TWMs son increíblemente ligeros y altamente personalizables, aunque a menudo vienen con una curva de aprendizaje más pronunciada. Son ideales para usuarios que priorizan la eficiencia, el minimalismo y los flujos de trabajo centrados en el teclado.</p>
+<h3 id="ciclo-de-lanzamiento">Ciclo de Lanzamiento</h3>
+<p>El ciclo de lanzamiento de una distribución define con qué frecuencia se entregan las actualizaciones y cómo se manejan los cambios importantes del sistema. Esto puede afectar la estabilidad del sistema y la frescura de su software.</p>
+<h4 id="lanzamiento-continuo">Lanzamiento Continuo</h4>
+<p>Las distros de lanzamiento continuo proporcionan las últimas actualizaciones de software tan pronto como están disponibles, eliminando la necesidad de actualizaciones importantes del sistema. Aunque esto asegura que siempre tengas las características más recientes, a veces puede conducir a la inestabilidad. Las distros de lanzamiento continuo son ideales para usuarios que prefieren tener el software más reciente y se sienten cómodos gestionando los posibles riesgos asociados con las actualizaciones frecuentes.</p>
+<h4 id="lanzamiento-punto">Lanzamiento Punto</h4>
+<p>Las distros de lanzamiento punto siguen un calendario de lanzamiento fijo, ofreciendo actualizaciones importantes periódicamente. Estos sistemas a menudo vienen con opciones de soporte a largo plazo (LTS), lo que garantiza estabilidad durante un período prolongado. Las distros de lanzamiento punto son beneficiosas para usuarios que priorizan la estabilidad y la predictibilidad del sistema, particularmente en entornos profesionales o de producción.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024 Guillermo Ibarra. Content licensed under a <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.indexes", "toc.follow", "toc.integrate"], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      
+    
+  </body>
+</html>
