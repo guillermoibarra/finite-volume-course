@@ -1,0 +1,52 @@
+site_name: "Fundamentals of Finite Volume Methods in CFD"
+
+# Repository
+repo_name: guillermoibarra/finite-volume-course
+repo_url: https://github.com/guillermoibarra/finite-volume-course
+
+# Copyright
+copyright: Copyright &copy; 2024 Guillermo Ibarra. Content licensed under a <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
+
+theme:
+  name: material
+  palette:
+    primary: indigo
+    scheme: slate
+  font:
+    text: Roboto
+    code: Jetbrains Mono
+
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.indexes
+    - toc.follow
+    - toc.integrate
+
+plugins:
+  - search
+  - i18n:
+      docs_structure: folder
+      languages:
+        - locale: en
+          name: English
+          build: true
+          default: true
+        - locale: es
+          name: Español
+          build: true
+          theme:
+            palette:
+              primary: blue grey
+              accent: blue
+          site_name: "Fundamentos de Métodos de Volúmenes Finitos en CFD"
+          nav_translations:
+            Home: Inicio
+
+nav:
+  - Home: index.md
+  - Linux Basics:
+    - "Introduction to Linux": linux/intro.md
+
